@@ -1,0 +1,67 @@
+# Snowflake Cost Optimization Configuration
+
+# Application Settings
+app:
+  name: "Snowflake Cost Optimizer"
+  version: "1.0.0"
+  debug: false
+  log_level: "INFO"
+
+# Snowflake Connection Settings (optional - environment variables take precedence)
+snowflake:
+  account: ""  # your_account_identifier
+  user: ""     # your_username
+  password: "" # your_password (not recommended - use env vars for security)
+  warehouse: "" # your_warehouse
+  database: ""  # your_database
+  schema: ""    # your_schema
+  role: ""      # your_role (optional)
+  private_key_path: ""  # path/to/private_key.p8 (optional)
+  private_key_passphrase: ""  # your_passphrase (optional)
+
+# Analysis Configuration
+analysis:
+  # How far back to look for usage patterns (in days)
+  lookback_days: 30
+  
+  # Minimum spend threshold for warehouse analysis (in credits)
+  min_warehouse_spend: 10
+  
+  # Query performance thresholds
+  performance:
+    slow_query_threshold_ms: 10000
+    frequent_query_min_executions: 100
+    
+  # Cost thresholds for alerts
+  cost_alerts:
+    high_spend_threshold: 1000
+    unexpected_spike_percentage: 50
+    
+# Optimization Settings
+optimization:
+  # Warehouse sizing recommendations
+  warehouse:
+    utilization_threshold: 0.8
+    idle_time_threshold_minutes: 30
+    
+  # Storage optimization
+  storage:
+    table_scan_threshold: 1000000  # rows
+    unused_table_days: 90
+    
+  # Query optimization
+  query:
+    min_execution_count: 10
+    performance_improvement_threshold: 0.3
+
+# Streamlit UI Configuration
+ui:
+  page_title: "Snowflake Cost Optimizer"
+  page_icon: "SF"
+  layout: "wide"
+  sidebar_state: "expanded"
+  
+# Cache Settings
+cache:
+  ttl_hours: 1
+  max_entries: 1000 
